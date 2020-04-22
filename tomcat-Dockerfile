@@ -1,8 +1,8 @@
-FROM centos:7.7
+FROM centos:7.7.1908
 MAINTAINER zhangdd
 LABEL Description="基于CentOS 7,安装了jre 8和tomcat8.5"  Version="1.0"
 #root
-RUN echo "root:123abc" | chpasswd
+RUN echo "root:123456" | chpasswd
 RUN /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
   && echo 'Asia/Shanghai' >/etc/timezone
 ENV CATALINA_HOME /webapp/tomcat8
@@ -16,7 +16,7 @@ ADD jdk1.8.0 /usr/local/jdk1.8.0
 RUN groupadd -g 1001 tomcat
 RUN useradd -d /webapp -u 1001 -g tomcat --shell /bin/bash tomcat
 # 设置tomcat用户的密码
-RUN echo "tomcat:123abc" | chpasswd
+RUN echo "tomcat:123456" | chpasswd
 # 将tomcat的压缩包放到 /webapp/tomcat8/ 目录下
 ADD tomcat8  /webapp/tomcat8
 # 将工作目录切换到 /webapp/tomcat8/, 之后的操作, 的基础目录为 /webapp/tomcat8/
